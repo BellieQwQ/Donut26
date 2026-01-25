@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://ducanrspkbnuf"]
+
+[ext_resource type="Texture2D" uid="uid://dcpuiks8pchbt" path="res://resources/particles/punch_particles.png" id="1_plpmr"]
+[ext_resource type="Script" uid="uid://bpgq1b1d1r6nc" path="res://scripts/particles/punch_particles.gd" id="2_pyybh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyybh"]
+atlas = ExtResource("1_plpmr")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj8ns"]
+atlas = ExtResource("1_plpmr")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4acs"]
+atlas = ExtResource("1_plpmr")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s805t"]
+atlas = ExtResource("1_plpmr")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcfsl"]
+atlas = ExtResource("1_plpmr")
+region = Rect2(160, 0, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gem55"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pyybh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qj8ns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4acs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s805t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcfsl")
+}],
+"loop": false,
+"name": &"punch",
+"speed": 24.0
+}]
+
+[node name="PunchParticles" type="AnimatedSprite2D" unique_id=1236807418]
+sprite_frames = SubResource("SpriteFrames_gem55")
+animation = &"punch"
+script = ExtResource("2_pyybh")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

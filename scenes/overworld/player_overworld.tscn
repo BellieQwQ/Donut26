@@ -1,0 +1,140 @@
+[gd_scene load_steps=18 format=3 uid="uid://dgcyfg4p4xkep"]
+
+[ext_resource type="Script" uid="uid://c5a48k8w0p87i" path="res://scripts/overworld control script/player_overworld.gd" id="1_sj16b"]
+[ext_resource type="Texture2D" uid="uid://bfwpm8esj3jy4" path="res://resources/player_sprites/Mario overworld.png" id="1_w5uot"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15j33"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8q3jh"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha6r7"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kn6i2"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3oha"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tyrv"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5im6"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wa5uv"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsdg5"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj16b"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tul4t"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4iodc"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh6op"]
+atlas = ExtResource("1_w5uot")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gsl0e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15j33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8q3jh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ha6r7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kn6i2")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3oha")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tyrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5im6")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wa5uv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsdg5")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sj16b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tul4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4iodc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh6op")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sj16b"]
+radius = 7.0
+
+[node name="playerOverworld" type="CharacterBody2D"]
+script = ExtResource("1_sj16b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gsl0e")
+animation = &"up"
+frame_progress = 0.7423074
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sj16b")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)

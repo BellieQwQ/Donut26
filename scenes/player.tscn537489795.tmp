@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bq5n6hb4g3n3s"]
+
+[ext_resource type="Texture2D" uid="uid://biv2euh60poad" path="res://resources/player_sprites/Mario 16x32.png" id="1_g2els"]
+[ext_resource type="Script" uid="uid://dok2esi1wxtb5" path="res://scripts/player_script/player.gd" id="2_qhqgy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("1_g2els")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("1_g2els")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tuyoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[node name="player" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_tuyoq")
+animation = &"idle"
+frame_progress = 0.6874376
+script = ExtResource("2_qhqgy")

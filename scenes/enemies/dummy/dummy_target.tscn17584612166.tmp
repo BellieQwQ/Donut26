@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://bflksmspp6mk0"]
+
+[ext_resource type="Texture2D" uid="uid://ca8t01slwio7k" path="res://resources/tutorial/dummy.png" id="1_7jqbj"]
+[ext_resource type="Script" uid="uid://cogx26y7hcod6" path="res://scripts/enemies/dummy/dummy_target.gd" id="1_v1vro"]
+[ext_resource type="PackedScene" uid="uid://d4ibof7qgu1ck" path="res://scenes/combat_damage_areas/hurtbox.tscn" id="3_t52w4"]
+[ext_resource type="Script" uid="uid://bj3cgp0ej3wlu" path="res://scripts/player scripts/state machine/state_machine.gd" id="4_mmghl"]
+[ext_resource type="Script" uid="uid://cbe6makwkvvel" path="res://scripts/enemies/dummy/idle.gd" id="5_cvwiy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpo2u"]
+atlas = ExtResource("1_7jqbj")
+region = Rect2(0, 42, 48, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_baskb"]
+atlas = ExtResource("1_7jqbj")
+region = Rect2(48, 42, 48, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1vro"]
+atlas = ExtResource("1_7jqbj")
+region = Rect2(0, 0, 48, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t52w4"]
+atlas = ExtResource("1_7jqbj")
+region = Rect2(48, 0, 48, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lpo2u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpo2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_baskb")
+}],
+"loop": false,
+"name": &"Getting_hurt",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1vro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t52w4")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_baskb"]
+size = Vector2(5, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lpo2u"]
+size = Vector2(19, 31)
+
+[node name="DummyTarget" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_v1vro")
+health_points = 100.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lpo2u")
+animation = &"Getting_hurt"
+frame = 1
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 4.5)
+shape = SubResource("RectangleShape2D_baskb")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_t52w4")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0.5, -1.5)
+shape = SubResource("RectangleShape2D_lpo2u")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_mmghl")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_cvwiy")
+
+[editable path="Hurtbox"]
