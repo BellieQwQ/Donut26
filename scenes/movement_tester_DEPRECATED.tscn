@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bflksmspp6mk0" path="res://scenes/enemies/dummy/dummy_target.tscn" id="2_3ltwe"]
 [ext_resource type="PackedScene" uid="uid://2eoq4mtdottc" path="res://scenes/enemies/spikes.tscn" id="3_r1ghp"]
 [ext_resource type="PackedScene" uid="uid://bq5n6hb4g3n3s" path="res://scenes/player/player.tscn" id="4_k68s2"]
+[ext_resource type="PackedScene" uid="uid://bti36unoy56ai" path="res://scenes/camera/camera.tscn" id="5_3ltwe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_22par"]
 texture = ExtResource("1_v7whr")
@@ -121,4 +122,7 @@ position = Vector2(2608, 544)
 position = Vector2(1848, 536)
 
 [node name="player" parent="." unique_id=1654695874 instance=ExtResource("4_k68s2")]
-position = Vector2(1680, 496)
+position = Vector2(-376, 568)
+
+[node name="Camera" parent="player" unique_id=1414801298 instance=ExtResource("5_3ltwe")]
+position = Vector2(376, -568)

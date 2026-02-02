@@ -22,11 +22,13 @@ config/icon="res://icon.svg"
 [autoload]
 
 PointManager="*uid://bs2ecapeqyjlr"
+TransitionManager="*uid://dsrbppt8d3ko5"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/stretch/mode="canvas_items"
 
 [global_group]
 

@@ -51,7 +51,6 @@ func enemy_squash_and_stretch_recovery(delta):
 		animator.skew = move_toward(animator.skew, 0.0, SQUASH_SPEED * delta)
 	
 func on_receive_damage(damage, punch_position):
-	print(health_points)
 	health_points -= damage
 	
 	if punch_position.x < global_position.x:

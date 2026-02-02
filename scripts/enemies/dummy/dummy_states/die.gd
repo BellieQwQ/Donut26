@@ -1,7 +1,6 @@
 extends State
 
 func on_enter_state():
-	PointManager.update_points(actor.points)
 	
 	if actor.player:
 		actor.player.perform_hitstop(0.04, 0.25)

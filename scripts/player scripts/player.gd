@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal update_lives(current_lives)
+
 const SPEED = 110              
 const SPRINT_SPEED = 230       
 const ACCELERATION = 780       
@@ -55,6 +57,7 @@ var must_bounce = false
 var can_chain_roll = false
 var is_sliding = false
 var is_invincible = false
+var is_in_intro = false
 
 var direction = 0
 var evasion_direction = 0
@@ -262,6 +265,7 @@ func on_receive_damage(damage, source_position):
 	emitter_on_left = source_position.x < global_position.x
 	
 	lives -= damage
+	update_lives.emit(lives)
 	
 	camera.screen_shake(8, 0.4)
 	perform_hitstop(0.05, 0.2)
@@ -317,8 +321,9 @@ func perform_hitstop(engine_velocity, duration):
 	Engine.time_scale = 1.0
 	
 func flip():
-	isFacingRight = !isFacingRight
-	scale.x *= -1
+	if !is_in_intro:
+		isFacingRight = !isFacingRight
+		scale.x *= -1
 	
 func spawn_particles(particle_position):
 	var particles = punch_particles_scene.instantiate()

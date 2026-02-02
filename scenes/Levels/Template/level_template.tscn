@@ -3,10 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://bti36unoy56ai" path="res://scenes/camera/camera.tscn" id="1_6xwj6"]
 [ext_resource type="Script" uid="uid://um88fc242klo" path="res://scripts/Levels/level_template.gd" id="1_l5ddd"]
 [ext_resource type="PackedScene" uid="uid://bq5n6hb4g3n3s" path="res://scenes/player/player.tscn" id="2_o1rkh"]
+[ext_resource type="PackedScene" uid="uid://ddmmxc14jhnvy" path="res://scenes/HUD/hud.tscn" id="4_sr6fq"]
 
 [node name="LevelTemplate" type="Node2D" unique_id=2034384004]
 script = ExtResource("1_l5ddd")
 player_scene = ExtResource("2_o1rkh")
+hud_scene = ExtResource("4_sr6fq")
 
 [node name="PlayableGround" type="TileMapLayer" parent="." unique_id=309353965]
 

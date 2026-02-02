@@ -4,5 +4,6 @@
 
 [node name="Camera" type="Camera2D" unique_id=1414801298 groups=["Camera"]]
 process_callback = 0
+limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("1_cvpoc")

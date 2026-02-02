@@ -3,7 +3,6 @@ extends Node2D
 @onready var player: Overworld_Player = $playerOverworld
 @onready var waypoints = $Waypoints
 
-var iris_scene: PackedScene = preload("res://scenes/transitions/iris_transition.tscn")
 var is_transitioning = false
 
 var current_waypoint: String = "A1"
@@ -68,13 +67,7 @@ func _unhandled_input(_event):
 		var level_data = levels[current_waypoint]
 		if level_data.get("is_playable", true) and level_data.has("level"):
 			is_transitioning = true
-			
-			var iris = iris_scene.instantiate()
-			add_child(iris)
-			iris.close()
-			
-			await iris.closed_iris
-			get_tree().change_scene_to_packed(level_data["level"])
+			await TransitionManager.perfom_overworld_to_level(level_data["level"])
 		return
 	
 	var neighbors = levels[current_waypoint]["neighbors"]

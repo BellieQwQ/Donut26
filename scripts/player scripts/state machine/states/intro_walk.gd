@@ -1,6 +1,6 @@
 extends State
 
-var intro_time = 5.0
+var intro_time = 4.0
 var intro_timer = 0.0
 
 var intro_direction = 1
@@ -8,6 +8,7 @@ var intro_direction = 1
 func on_enter_state():
 	intro_timer = intro_time
 	
+	actor.is_in_intro = true
 	actor.legs_animator.set_deferred("visible", true)
 	actor.torso_animator.play("Run_torso")
 	actor.legs_animator.play("Run_legs")
@@ -24,5 +25,6 @@ func on_physics(delta):
 		state_machine.on_state_change("Idle")
 	
 func on_exit_state():
+	actor.is_in_intro = false
 	actor.set_hurtbox_size("Stand")
 	actor.legs_animator.set_deferred("visible", false)
