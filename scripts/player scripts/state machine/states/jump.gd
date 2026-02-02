@@ -1,6 +1,8 @@
 extends State
 
 func on_enter_state():
+	actor.set_hurtbox_size("Stand")
+	
 	if actor.coyote_timer > 0:
 		actor.jump_count = 1
 		actor.coyote_timer = 0
@@ -16,8 +18,7 @@ func on_enter_state():
 	actor.velocity.y = actor.jump_velocity
 	print("Entering state: " + str(state_machine.current_state))
 
-	actor.stand_collision.set_deferred("disabled", true)
-	actor.jump_collision.set_deferred("disabled", false)
+	actor.set_collision_size("Jump")
 
 func on_physics(delta):
 	if Input.is_action_just_pressed("jump") and actor.jump_count < actor.max_jumps:
@@ -52,5 +53,4 @@ func on_physics(delta):
 	actor.move_and_slide()
 
 func on_exit_state():
-	actor.stand_collision.set_deferred("disabled", false)
-	actor.jump_collision.set_deferred("disabled", true)
+	actor.set_hurtbox_size("Stand")

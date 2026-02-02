@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://c527omubet1eg" path="res://resources/player_sprites/mario 38x42.png" id="8_i4ail"]
 [ext_resource type="Script" uid="uid://ds7sogum3th05" path="res://scripts/player scripts/state machine/states/fall.gd" id="8_smehm"]
 [ext_resource type="Script" uid="uid://dtgxjmlyahwy2" path="res://scripts/player scripts/state machine/states/sprint.gd" id="9_ur7pv"]
-[ext_resource type="Script" uid="uid://b45c2ji84qe4y" path="res://scripts/player scripts/camera_2d.gd" id="10_007i1"]
+[ext_resource type="PackedScene" uid="uid://d4ibof7qgu1ck" path="res://scenes/combat_damage_areas/hurtbox.tscn" id="12_28m0y"]
 [ext_resource type="Script" uid="uid://d4afkkgdf378f" path="res://scripts/player scripts/state machine/states/land.gd" id="12_jej6c"]
 [ext_resource type="Script" uid="uid://b2121jaw2uvom" path="res://scripts/player scripts/state machine/states/crouch.gd" id="13_jej6c"]
 [ext_resource type="Script" uid="uid://41qs2irxlcjs" path="res://scripts/player scripts/state machine/states/dive.gd" id="15_a8ls1"]
@@ -25,13 +25,22 @@
 [ext_resource type="Script" uid="uid://fwxsp3uo5oph" path="res://scripts/player scripts/state machine/states/skid.gd" id="18_fulsm"]
 [ext_resource type="Script" uid="uid://dm5prstk5mncw" path="res://scripts/player scripts/state machine/states/punch.gd" id="20_60mlk"]
 [ext_resource type="Script" uid="uid://fartyl3h1fki" path="res://scripts/player scripts/state machine/states/roll_attack.gd" id="22_a38lo"]
-[ext_resource type="Script" uid="uid://0cgopsbu4s55" path="res://scripts/player scripts/state machine/states/bounce.gd" id="23_4ni07"]
+[ext_resource type="Script" uid="uid://0cgopsbu4s55" path="res://scripts/player scripts/state machine/states/roll_bounce.gd" id="23_4ni07"]
+[ext_resource type="Script" uid="uid://b0bpo4oqi22" path="res://scripts/player scripts/state machine/states/bounce.gd" id="27_j4nxn"]
+[ext_resource type="Script" uid="uid://rnlggxl70ksg" path="res://scripts/player scripts/state machine/states/intro_walk.gd" id="29_iqsei"]
+[ext_resource type="Script" uid="uid://ca610k1flup4e" path="res://scripts/player scripts/state machine/states/hurt.gd" id="29_uniwh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke2ow"]
 size = Vector2(15, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_007i1"]
 size = Vector2(10, 5.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6cv16"]
+size = Vector2(15.5, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uniwh"]
+size = Vector2(14, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4otl"]
 atlas = ExtResource("6_4r5pv")
@@ -137,6 +146,10 @@ region = Rect2(0, 0, 43, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
 atlas = ExtResource("3_fjrip")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqsei"]
+atlas = ExtResource("3_fjrip")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_g2els")
@@ -273,6 +286,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_iqsei")
+}],
+"loop": true,
+"name": &"Hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_g2els")
 }, {
 "duration": 1.0,
@@ -403,15 +424,72 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(10, 19)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qfm1y"]
-size = Vector2(10, 10)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fulsm"]
-size = Vector2(10, 9)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4r5pv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ni07"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4nxn"]
+
+[sub_resource type="Animation" id="Animation_uniwh"]
+resource_name = "Iframes_0.8"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("legs:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.15686275), Color(1, 1, 1, 1), Color(1, 1, 1, 0.15686275), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("torso:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.15686275), Color(1, 1, 1, 1), Color(1, 1, 1, 0.15686275), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_iqsei"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("legs:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("torso:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tffgl"]
+_data = {
+&"Iframes_0.8": SubResource("Animation_uniwh"),
+&"RESET": SubResource("Animation_iqsei")
+}
 
 [node name="player" type="CharacterBody2D" unique_id=80837118 groups=["Player"]]
 collision_layer = 2
@@ -424,8 +502,8 @@ collision_layer = 2
 collision_mask = 4
 monitoring = false
 
-[node name="CollisionShape2D" parent="Punch_hitbox" index="0"]
-position = Vector2(12.5, -1.5)
+[node name="CollisionShape2D" parent="Punch_hitbox" index="0" unique_id=619151228]
+position = Vector2(13, -1)
 shape = SubResource("RectangleShape2D_ke2ow")
 
 [node name="Roll_hitbox" parent="." unique_id=1145478363 instance=ExtResource("2_l71n6")]
@@ -433,45 +511,49 @@ collision_layer = 2
 collision_mask = 4
 monitoring = false
 
-[node name="CollisionShape2D" parent="Roll_hitbox" index="0"]
+[node name="CollisionShape2D" parent="Roll_hitbox" index="0" unique_id=619151228]
 position = Vector2(0, 19.25)
 shape = SubResource("RectangleShape2D_007i1")
+
+[node name="Slide_hitbox" parent="." unique_id=1181046693 instance=ExtResource("2_l71n6")]
+collision_layer = 2
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape2D" parent="Slide_hitbox" index="0" unique_id=619151228]
+position = Vector2(12.75, 13)
+shape = SubResource("RectangleShape2D_6cv16")
+
+[node name="Hurtbox" parent="." unique_id=2126193547 instance=ExtResource("12_28m0y")]
+collision_layer = 2
+collision_mask = 12
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0" unique_id=1756737358]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_uniwh")
 
 [node name="Punch_Particle_Spawner" type="Marker2D" parent="." unique_id=280919456]
 position = Vector2(13, -1)
 
 [node name="Roll_Particle_Spawner" type="Marker2D" parent="." unique_id=1366153484]
-position = Vector2(0, 19)
+position = Vector2(0, 25)
+
+[node name="Slide_Particle_Spawner" type="Marker2D" parent="." unique_id=1061925315]
+position = Vector2(23, 13)
 
 [node name="legs" type="AnimatedSprite2D" parent="." unique_id=518097407]
 sprite_frames = SubResource("SpriteFrames_ke2ow")
-animation = &"Jump_punch_legs"
+animation = &"Idle_legs"
 
 [node name="torso" type="AnimatedSprite2D" parent="." unique_id=1561037181]
 position = Vector2(0, 16)
 sprite_frames = SubResource("SpriteFrames_dqkch")
-animation = &"Punch_left_torso"
+animation = &"Hurt"
 offset = Vector2(0, -16)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=351843604]
-zoom = Vector2(3, 3)
-process_callback = 0
-position_smoothing_enabled = true
-script = ExtResource("10_007i1")
-
-[node name="StandCollision" type="CollisionShape2D" parent="." unique_id=1125034837]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1125034837]
 position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_g2els")
-
-[node name="EvasionCollision" type="CollisionShape2D" parent="." unique_id=1490021099]
-position = Vector2(0, 11)
-shape = SubResource("RectangleShape2D_qfm1y")
-disabled = true
-
-[node name="JumpCollision" type="CollisionShape2D" parent="." unique_id=544861981]
-position = Vector2(0, 1.5)
-shape = SubResource("RectangleShape2D_fulsm")
-disabled = true
 
 [node name="EvasionDetector" type="ShapeCast2D" parent="." unique_id=624610035]
 position = Vector2(0, 1)
@@ -488,9 +570,20 @@ shape = SubResource("RectangleShape2D_4ni07")
 target_position = Vector2(0, 5)
 collision_mask = 5
 
+[node name="BounceDetector" type="ShapeCast2D" parent="." unique_id=406627116]
+position = Vector2(11, 10)
+scale = Vector2(0.5, 0.5)
+enabled = false
+shape = SubResource("RectangleShape2D_j4nxn")
+target_position = Vector2(6, 0)
+collision_mask = 5
+
+[node name="FXmanager" type="AnimationPlayer" parent="." unique_id=1937357824]
+libraries/ = SubResource("AnimationLibrary_tffgl")
+
 [node name="StateMachine" type="Node" parent="." unique_id=111984373 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_qhqgy")
-initial_state = NodePath("Idle")
+initial_state = NodePath("IntroWalk")
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=319773341]
 script = ExtResource("4_dqkch")
@@ -531,8 +624,19 @@ script = ExtResource("20_60mlk")
 [node name="RollAttack" type="Node" parent="StateMachine" unique_id=593875675]
 script = ExtResource("22_a38lo")
 
-[node name="Bounce" type="Node" parent="StateMachine" unique_id=1714492110]
+[node name="RollBounce" type="Node" parent="StateMachine" unique_id=1714492110]
 script = ExtResource("23_4ni07")
+
+[node name="Bounce" type="Node" parent="StateMachine" unique_id=1396436832]
+script = ExtResource("27_j4nxn")
+
+[node name="Hurt" type="Node" parent="StateMachine" unique_id=1895245539]
+script = ExtResource("29_uniwh")
+
+[node name="IntroWalk" type="Node" parent="StateMachine" unique_id=1422372898]
+script = ExtResource("29_iqsei")
 
 [editable path="Punch_hitbox"]
 [editable path="Roll_hitbox"]
+[editable path="Slide_hitbox"]
+[editable path="Hurtbox"]

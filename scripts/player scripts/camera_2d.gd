@@ -6,7 +6,14 @@ var shake_time = 0.0
 var shake_time_speed = 20.0
 var decay = 5.0
 
+var actor_to_follow: Node2D
+
 var noise = FastNoiseLite.new()
+
+func _process(_delta):
+	if actor_to_follow != null:
+		global_position = actor_to_follow.global_position
+	
 
 func _physics_process(delta):
 	if active_shake_time > 0:

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://2eoq4mtdottc"]
+
+[ext_resource type="Script" uid="uid://iadp6j7mml8r" path="res://scenes/enemies/spikes/spikes.gd" id="1_cdgci"]
+[ext_resource type="Texture2D" uid="uid://ca2cesbrex5kh" path="res://resources/tutorial/tileset.png" id="1_rwk6d"]
+[ext_resource type="PackedScene" uid="uid://doc7hm2qog8oq" path="res://scenes/combat_damage_areas/hitbox.tscn" id="2_cdgci"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akm6c"]
+atlas = ExtResource("1_rwk6d")
+region = Rect2(48, 96, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l7voe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akm6c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44qpl"]
+size = Vector2(16, 4)
+
+[node name="Spikes" type="Node2D" unique_id=1438717547]
+script = ExtResource("1_cdgci")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1547707461]
+sprite_frames = SubResource("SpriteFrames_l7voe")
+
+[node name="Hitbox" parent="." unique_id=526444056 instance=ExtResource("2_cdgci")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0" unique_id=619151228]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_44qpl")
+
+[editable path="Hitbox"]

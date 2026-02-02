@@ -13,8 +13,7 @@ func on_enter_state():
 	actor.velocity.y = actor.jump_velocity
 	print("Entering state: " + str(state_machine.current_state))
 
-	actor.stand_collision.set_deferred("disabled", true)
-	actor.jump_collision.set_deferred("disabled", false)
+	actor.set_collision_size("Jump")
 
 func on_physics(delta):
 	if just_entered:
@@ -50,5 +49,3 @@ func on_physics(delta):
 
 func on_exit_state():
 	just_entered = false
-	actor.stand_collision.set_deferred("disabled", false)
-	actor.jump_collision.set_deferred("disabled", true)

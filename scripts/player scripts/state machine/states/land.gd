@@ -1,6 +1,8 @@
 extends State
 
 func on_enter_state():
+	actor.set_hurtbox_size("Stand")
+	actor.set_collision_size("Stand")
 	actor.torso_animator.play("Land")
 	actor.torso_animator.scale = Vector2(1.3, 0.7)
 	actor.jump_count = 0
@@ -19,9 +21,16 @@ func on_physics(delta):
 	if !actor.is_on_floor():
 		state_machine.on_state_change("Fall")
 		return
+	else:
+		if Input.is_action_pressed("crouch"):
+			state_machine.on_state_change("Crouch")
+			return
 
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.FRICTION * delta)
 	actor.move_and_slide()
 
 	if !actor.torso_animator.is_playing() or actor.torso_animator.animation != "Land":
 		state_machine.on_state_change("Idle")
+		
+func on_exit_state():
+	actor.set_hurtbox_size("Stand")

@@ -20,18 +20,17 @@ func on_enter_state():
 	
 	print("Entering state: " + str(state_machine.current_state))
 	
-	actor.stand_collision.set_deferred("disabled", true)
-	actor.jump_collision.set_deferred("disabled", false)
+	actor.set_hurtbox_size("Dive")
+	actor.set_collision_size("Stand")
 	
 func on_physics(delta):
+	if Input.is_action_just_pressed("attack") and actor.jump_count >= 2:
+		state_machine.on_state_change("RollAttack")
+		return
 	
 	dive_timer -= delta
 	
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SKID_FRICTION * delta)
-	
-	if actor.velocity.y > 0:
-		actor.stand_collision.set_deferred("disabled", false)
-		actor.jump_collision.set_deferred("disabled", true)
 	
 	if dive_timer <= 0:
 		actor.torso_animator.scale = Vector2(1, 1)
@@ -43,4 +42,8 @@ func on_physics(delta):
 		state_machine.on_state_change("Land")
 	
 	actor.move_and_slide()
+	
+func on_exit_state():
+	actor.set_hurtbox_size("Stand")
+	actor.set_collision_size("Stand")
 	

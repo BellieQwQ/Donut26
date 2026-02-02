@@ -3,6 +3,9 @@ extends State
 func on_enter_state():
 	actor.torso_animator.play("Skid")
 	print("Entering state: " + str(state_machine.current_state))
+	
+	actor.set_hurtbox_size("Stand")
+	actor.set_collision_size("Stand")
 
 func on_physics(delta):
 	if actor.jump_buffer_timer > 0 and actor.is_on_floor():
@@ -34,3 +37,6 @@ func on_physics(delta):
 		return
 
 	actor.move_and_slide()
+	
+func on_exit_state():
+	actor.set_hurtbox_size("Stand")

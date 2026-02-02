@@ -1,6 +1,6 @@
 extends State
 
-var punch_duration = 0.25
+var punch_duration = 0.2
 var punch_timer = 0
 
 func on_enter_state():
@@ -38,8 +38,10 @@ func on_enter_state():
 		3:
 			actor.torso_animator.play("Uppercut")
 			actor.torso_animator.scale = Vector2(1.5, 0.8)
-			actor.legs_animator.scale = Vector2(1.5, 1)
 			actor.legs_animator.set_deferred("visible", false)
+		#4:
+			#actor.torso_animator.play("Kick")
+			#actor.legs_animator.set_deferred("visible", false)
 	
 	actor.punch_area.set_deferred("monitoring", true)
 	
@@ -53,6 +55,8 @@ func on_enter_state():
 	
 	print("Entering state: " + str(state_machine.current_state))
 	
+	actor.set_hurtbox_size("Stand")
+	actor.set_collision_size("Stand")
 	
 func on_physics(delta):
 	if actor.jump_buffer_timer > 0 and actor.is_on_floor():
@@ -84,3 +88,5 @@ func on_physics(delta):
 func on_exit_state():
 	actor.legs_animator.set_deferred("visible", false)
 	actor.punch_area.set_deferred("monitoring", false)
+	
+	actor.set_hurtbox_size("Stand")

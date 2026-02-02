@@ -1,0 +1,11 @@
+Todos los scripts de estado han sido actualizados para usar el método `actor.set_collision_size()` en lugar de deshabilitar/habilitar directamente las formas de colisión.
+
+**Resumen de los cambios:**
+
+*   Los scripts de estado (`crouch.gd`, `roll.gd`, `slide.gd`, `roll_attack.gd`, `roll_bounce.gd`, `bounce.gd`, `jump.gd`, `double_jump.gd`, `fall.gd`, `land.gd`, `idle.gd`, `walk.gd`, `sprint.gd`, `punch.gd`, `skid.gd`, `hurt.gd`, `dive.gd`) han sido modificados.
+*   Se ha eliminado la lógica antigua de habilitar/deshabilitar `stand_collision`, `evasion_collision` o `jump_collision`.
+*   En su lugar, estos scripts ahora llaman a `actor.set_collision_size()` con el tipo de colisión apropiado ("Stand", "Evasion" o "Jump") en sus funciones `on_enter_state` y/o `on_exit_state`.
+
+**Siguientes pasos:**
+
+Dado que las antiguas formas de colisión (`stand_collision`, `evasion_collision`, `jump_collision`) ya no son utilizadas por los scripts, ahora puedes eliminar de forma segura estos nodos de tu escena `player.tscn` en el editor de Godot.

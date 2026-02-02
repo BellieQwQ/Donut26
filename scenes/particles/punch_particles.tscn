@@ -49,6 +49,8 @@ animations = [{
 [node name="PunchParticles" type="AnimatedSprite2D" unique_id=1236807418]
 sprite_frames = SubResource("SpriteFrames_gem55")
 animation = &"punch"
+frame = 4
+frame_progress = 1.0
 script = ExtResource("2_pyybh")
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

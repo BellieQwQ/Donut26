@@ -21,11 +21,16 @@ func on_enter_state():
 	
 	print("Entering state: " + str(state_machine.current_state))
 	
-	actor.stand_collision.set_deferred("disabled", true)
-	actor.evasion_collision.set_deferred("disabled", false)
 	actor.evasion_detector.set_deferred("enabled", true)
+	actor.bounce_detector.set_deferred("enabled", true)
+	
+	actor.set_hurtbox_size("Evasion")
+	actor.set_collision_size("Evasion")
 	
 func on_physics(delta):
+	if actor.must_bounce:
+		state_machine.on_state_change("Bounce")
+		return
 	
 	roll_timer -= delta
 	
@@ -51,6 +56,8 @@ func on_exit_state():
 	actor.torso_animator.speed_scale = 1.0
 	actor.torso_animator.skew = 0
 	
-	actor.stand_collision.set_deferred("disabled", false)
-	actor.evasion_collision.set_deferred("disabled", true)
 	actor.evasion_detector.set_deferred("enabled", false)
+	actor.bounce_detector.set_deferred("enabled", false)
+	
+	actor.set_hurtbox_size("Stand")
+	actor.set_collision_size("Stand")

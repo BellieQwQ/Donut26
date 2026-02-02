@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bti36unoy56ai"]
+
+[ext_resource type="Script" uid="uid://b45c2ji84qe4y" path="res://scripts/player scripts/camera_2d.gd" id="1_cvpoc"]
+
+[node name="Camera" type="Camera2D" unique_id=1414801298 groups=["Camera"]]
+process_callback = 0
+position_smoothing_enabled = true
+script = ExtResource("1_cvpoc")

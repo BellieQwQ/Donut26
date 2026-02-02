@@ -4,6 +4,9 @@ var slide_duration = 0.35
 var slide_timer = 0
 
 func on_enter_state():
+	actor.is_sliding = true
+	actor.enemies_hit_by_slide.clear()
+	
 	actor.torso_animator.play("Slide")
 	
 	actor.torso_animator.scale = Vector2(1.3, 0.7)
@@ -19,14 +22,21 @@ func on_enter_state():
 	
 	print("Entering state: " + str(state_machine.current_state))
 	
-	actor.stand_collision.set_deferred("disabled", true)
-	actor.evasion_collision.set_deferred("disabled", false)
 	actor.evasion_detector.set_deferred("enabled", true)
+	actor.bounce_detector.set_deferred("enabled", true)
+	actor.slide_area.set_deferred("monitoring", true)
+	
+	actor.set_hurtbox_size("Evasion")
+	actor.set_collision_size("Evasion")
 	
 func on_physics(delta):
 	slide_timer -= delta
 	
-	if slide_timer <= 0.2 and actor.jump_buffer_timer > 0 and actor.is_on_floor():
+	if actor.must_bounce:
+		state_machine.on_state_change("Bounce")
+		return
+	
+	if slide_timer <= 0.2 and actor.jump_buffer_timer > 0 and actor.is_on_floor() and !actor.blocked_above:
 		actor.jump_buffer_timer = 0 
 		state_machine.on_state_change("Jump")
 		return
@@ -50,6 +60,10 @@ func on_physics(delta):
 	actor.move_and_slide()
 	
 func on_exit_state():
-	actor.stand_collision.set_deferred("disabled", false)
-	actor.evasion_collision.set_deferred("disabled", true)
+	actor.is_sliding = false
 	actor.evasion_detector.set_deferred("enabled", false)
+	actor.bounce_detector.set_deferred("enabled", false)
+	actor.slide_area.set_deferred("monitoring", false)
+	
+	actor.set_hurtbox_size("Stand")
+	actor.set_collision_size("Stand")

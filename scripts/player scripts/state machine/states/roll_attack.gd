@@ -1,6 +1,7 @@
 extends State
 
 func on_enter_state():
+	
 	actor.torso_animator.play("Roll") 
 	actor.torso_animator.speed_scale = 1.6
 	actor.torso_animator.scale = Vector2(0.5, 1.5) 
@@ -13,22 +14,29 @@ func on_enter_state():
 		actor.punch_direction = 1 if actor.isFacingRight else -1 
 		actor.velocity.x = 0
 	
-	actor.bounce_detector.set_deferred("enabled", true)
+	actor.roll_bounce_detector.set_deferred("enabled", true)
 	
 	actor.velocity.y = actor.ROLL_ATTACK_VERTICAL_BOOST 
 	actor.roll_area.set_deferred("monitoring", true)
 	
 	print("Entering state: " + str(state_machine.current_state))
 	
+	actor.set_hurtbox_size("Evasion")
+	actor.set_collision_size("Evasion")
+	
 func on_physics(_delta):
+	
 	actor.move_and_slide() 
 	
-	if actor.bounce_detector.is_colliding():
-		state_machine.on_state_change("Bounce") 
+	if actor.must_roll_bounce:
+		state_machine.on_state_change("RollBounce") 
 		actor.camera.screen_shake(4, 0.1)
 		return 
 	
 func on_exit_state():
 	actor.roll_area.set_deferred("monitoring", false)
-	actor.bounce_detector.set_deferred("enabled", false)
+	actor.roll_bounce_detector.set_deferred("enabled", false)
 	actor.torso_animator.speed_scale = 1.0 
+	
+	actor.set_hurtbox_size("Stand")
+	actor.set_collision_size("Stand")

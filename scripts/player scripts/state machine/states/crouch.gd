@@ -5,9 +5,10 @@ func on_enter_state():
 	actor.torso_animator.scale = Vector2(1.2, 0.8)
 	print("Entering state: " + str(state_machine.current_state))
 	
-	actor.stand_collision.set_deferred("disabled", true)
-	actor.evasion_collision.set_deferred("disabled", false)
 	actor.evasion_detector.set_deferred("enabled", true)
+	
+	actor.set_hurtbox_size("Evasion")
+	actor.set_collision_size("Evasion")
 	
 func on_physics(delta):
 	if Input.is_action_just_pressed("evasion"):
@@ -42,6 +43,7 @@ func on_physics(delta):
 	actor.move_and_slide()
 	
 func on_exit_state():
-	actor.stand_collision.set_deferred("disabled", false)
-	actor.evasion_collision.set_deferred("disabled", true)
 	actor.evasion_detector.set_deferred("enabled", false)
+	
+	actor.set_hurtbox_size("Stand")
+	actor.set_collision_size("Stand")

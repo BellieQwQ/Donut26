@@ -3,6 +3,8 @@ extends State
 var not_falling_after_jump = false
 
 func on_enter_state():
+	actor.set_hurtbox_size("Stand")
+	actor.set_collision_size("Stand")
 	
 	not_falling_after_jump = (actor.coyote_timer > 0 and actor.jump_count == 0)
 
@@ -54,3 +56,6 @@ func on_physics(delta):
 		return
 	
 	actor.move_and_slide()
+	
+func on_exit_state():
+	actor.set_hurtbox_size("Stand")

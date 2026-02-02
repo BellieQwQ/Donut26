@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://q4udes1poamc"]
+
+[ext_resource type="PackedScene" uid="uid://bti36unoy56ai" path="res://scenes/camera/camera.tscn" id="1_6xwj6"]
+[ext_resource type="Script" uid="uid://um88fc242klo" path="res://scripts/Levels/level_template.gd" id="1_l5ddd"]
+[ext_resource type="PackedScene" uid="uid://bq5n6hb4g3n3s" path="res://scenes/player/player.tscn" id="2_o1rkh"]
+
+[node name="LevelTemplate" type="Node2D" unique_id=2034384004]
+script = ExtResource("1_l5ddd")
+player_scene = ExtResource("2_o1rkh")
+
+[node name="PlayableGround" type="TileMapLayer" parent="." unique_id=309353965]
+
+[node name="Enemies" type="Node" parent="." unique_id=719198386]
+
+[node name="PlayerSpawner" type="Marker2D" parent="." unique_id=888719330]
+
+[node name="LevelCamera" parent="." unique_id=1414801298 instance=ExtResource("1_6xwj6")]

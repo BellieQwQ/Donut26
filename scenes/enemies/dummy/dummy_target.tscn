@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ca8t01slwio7k" path="res://resources/tutorial/dummy.png" id="1_7jqbj"]
 [ext_resource type="Script" uid="uid://cogx26y7hcod6" path="res://scripts/enemies/dummy/dummy_target.gd" id="1_v1vro"]
+[ext_resource type="PackedScene" uid="uid://skse8lsomcfy" path="res://scenes/points/point_popup.tscn" id="2_wfel5"]
 [ext_resource type="PackedScene" uid="uid://d4ibof7qgu1ck" path="res://scenes/combat_damage_areas/hurtbox.tscn" id="3_t52w4"]
 [ext_resource type="Script" uid="uid://bj3cgp0ej3wlu" path="res://scripts/player scripts/state machine/state_machine.gd" id="4_mmghl"]
 [ext_resource type="Script" uid="uid://4e8iobu1ysuw" path="res://scripts/enemies/dummy/dummy_states/hurt.gd" id="6_o171x"]
@@ -167,13 +168,18 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lpo2u"]
-size = Vector2(19, 30)
+size = Vector2(19, 37)
 
 [node name="DummyTarget" type="CharacterBody2D" unique_id=1511839005]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_v1vro")
-health_points = 100.0
+health_points = 30.0
+points = 100
+point_popup_scene = ExtResource("2_wfel5")
+
+[node name="PointSpawner" type="Marker2D" parent="." unique_id=1924235299]
+position = Vector2(0, -46)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1515911289]
 sprite_frames = SubResource("SpriteFrames_lpo2u")
@@ -191,8 +197,8 @@ libraries/ = SubResource("AnimationLibrary_o171x")
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(0.5, -22)
+[node name="CollisionShape2D" parent="Hurtbox" index="0" unique_id=1756737358]
+position = Vector2(0.5, -18.5)
 shape = SubResource("RectangleShape2D_lpo2u")
 
 [node name="StateMachine" type="Node" parent="." unique_id=36359470 node_paths=PackedStringArray("initial_state")]

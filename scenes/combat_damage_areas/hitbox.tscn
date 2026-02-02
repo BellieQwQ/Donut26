@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://doc7hm2qog8oq"]
 
-[node name="Hitbox" type="Area2D"]
+[node name="Hitbox" type="Area2D" unique_id=526444056]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=619151228]
 debug_color = Color(0.72156864, 0.13333334, 0.29411766, 0.41960785)

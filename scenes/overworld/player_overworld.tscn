@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dgcyfg4p4xkep"]
+[gd_scene format=3 uid="uid://dgcyfg4p4xkep"]
 
 [ext_resource type="Script" uid="uid://c5a48k8w0p87i" path="res://scripts/overworld control script/player_overworld.gd" id="1_sj16b"]
 [ext_resource type="Texture2D" uid="uid://bfwpm8esj3jy4" path="res://resources/player_sprites/Mario overworld.png" id="1_w5uot"]
@@ -125,16 +125,15 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_sj16b"]
 radius = 7.0
 
-[node name="playerOverworld" type="CharacterBody2D"]
+[node name="playerOverworld" type="CharacterBody2D" unique_id=598577959]
 script = ExtResource("1_sj16b")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=860591042]
 sprite_frames = SubResource("SpriteFrames_gsl0e")
 animation = &"up"
 frame_progress = 0.7423074
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=23747587]
 shape = SubResource("CircleShape2D_sj16b")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+[node name="Camera2D" type="Camera2D" parent="." unique_id=875698671]

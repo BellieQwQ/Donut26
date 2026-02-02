@@ -2,6 +2,8 @@ extends State
 
 func on_enter_state():
 	actor.legs_animator.set_deferred("visible", true)
+	actor.set_hurtbox_size("Stand")
+	actor.set_collision_size("Stand")
 	
 	actor.jump_count = 0
 	actor.torso_animator.play("Run_torso")
@@ -46,4 +48,5 @@ func on_physics(delta):
 	actor.move_and_slide()
 	
 func on_exit_state():
+	actor.set_hurtbox_size("Stand")
 	actor.legs_animator.set_deferred("visible", false)
